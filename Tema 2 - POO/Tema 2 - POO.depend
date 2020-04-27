@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1587978014 source:c:\users\clubp\desktop\facultate\oop\tema 2 - poo\engine.cpp
+	"engine.h"
+
+1587978326 c:\users\clubp\desktop\facultate\oop\tema 2 - poo\engine.h
+	<iostream>
+
+1584209020 source:c:\users\clubp\desktop\facultate\oop\tema 2 - poo\main.cpp
+	<iostream>
+
+1587646533 source:c:\users\clubp\desktop\facultate\oop\tema 2 - poo\input.cpp
+	<iostream>
+	<windows.h>
+	<conio.h>
+	"input.h"
+	"joctanc.h"
+
+1587644852 c:\users\clubp\desktop\facultate\oop\tema 2 - poo\input.h
+
+1587638790 c:\users\clubp\desktop\facultate\oop\tema 2 - poo\joctanc.h
+	"engine.h"
+
+1587978293 source:c:\users\clubp\desktop\facultate\oop\tema 2 - poo\joctanc.cpp
+	"joctanc.h"
+
+1587978250 source:c:\users\clubp\desktop\facultate\oop\tema 2 - poo\output.cpp
+	<windows.h>
+	"output.h"
+
+1587645714 c:\users\clubp\desktop\facultate\oop\tema 2 - poo\output.h
+	"engine.h"
+	"joctanc.h"
+
+1587999472 source:c:\users\clubp\desktop\facultate\oop\tema 2 - poo\tanc.cpp
+	"input.h"
+	"output.h"
+	"joctanc.h"
+
