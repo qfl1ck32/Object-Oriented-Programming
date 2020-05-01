@@ -263,6 +263,7 @@ std :: istream & operator >> (std :: istream &in, individ &i) {
     std :: cout<<"Viu sau mort (1 sau 0): ";
     in>>i.viu;
 
+    return in;
 }
 
 std :: ostream & operator << (std :: ostream &out, const individ &i) {
@@ -270,11 +271,13 @@ std :: ostream & operator << (std :: ostream &out, const individ &i) {
 /// Supraincarcarea operatorului << pentru a afisa (datele despre) un individ.
 
     out<<"Individul se afla pe pozitia ("<<i.i<<", "<<i.j<<"), are energia egala cu "<<i.energie<<", este de tip "<<i.tip<<" si este ";
+
     if (i.viu == 1)
         std :: cout<<"viu.";
     else
         std :: cout<<"mort.";
 
+    return out;
 }
 
 
