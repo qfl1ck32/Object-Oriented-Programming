@@ -36,3 +36,32 @@
 	"output.h"
 	"joctanc.h"
 
+1588320524 source:c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\engine.cpp
+	"engine.h"
+
+1588320524 c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\engine.h
+	<iostream>
+
+1588320524 source:c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\input.cpp
+	<iostream>
+	<windows.h>
+	<conio.h>
+	"input.h"
+	"joctanc.h"
+
+1588320524 c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\input.h
+
+1588320524 c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\joctanc.h
+	"engine.h"
+
+1588320524 source:c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\joctanc.cpp
+	"joctanc.h"
+
+1588320524 source:c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\output.cpp
+	<windows.h>
+	"output.h"
+
+1588320524 c:\users\clubp\desktop\facultate\object-oriented-programming\homework 2\output.h
+	"engine.h"
+	"joctanc.h"
+

@@ -39,7 +39,7 @@
 		<Unit filename="joctanc.cpp" />
 		<Unit filename="output.cpp" />
 		<Unit filename="output.h" />
-		<Unit filename="tanc.cpp" />
+		<Unit filename="tank.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

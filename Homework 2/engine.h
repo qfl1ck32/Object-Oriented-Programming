@@ -5,7 +5,7 @@
 
 #define MAXNL 23
 #define MAXNC 23
-#define MAXNU (MAXNL + 1) / 2 * (MAXNC / 2) + 3 /// numar de numere impare in MAXNL * numar de numere pare in MAXNC + numar de unitati <> zid | + 3 pentru ca sunt doua tancuri si cel mult o bomba.
+#define MAXNU (MAXNL + 1) / 2 * (MAXNC / 2) + 5 /// numar de numere impare in MAXNL * numar de numere pare in MAXNC + numar de unitati <> zid | + 3 pentru ca sunt doua tancuri si cel mult o bomba.
 #define MAXNM 5
 
 
