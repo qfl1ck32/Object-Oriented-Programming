@@ -4,6 +4,9 @@
 #include <ctime>
 #include <windows.h>
 
+#define dimX 30
+#define dimY 70
+
 #define VarstaMaxima 20
 #define EnergieInitiala 20
 
@@ -339,7 +342,7 @@ int main() {
 
     /// Programul principal, realizat conform cerintei.
 
-    tabla x(20, 70);
+    tabla x(dimX, dimY);
     x.initializare();
 
     while (!kbhit()) {
