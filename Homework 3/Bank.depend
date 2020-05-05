@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1588672830 source:c:\users\clubp\desktop\facultate\oop\homework 3\bank\bank.cpp
+	<iostream>
+	<cmath>
+	<algorithm>
+	<conio.h>
+	<ctime>
+	"Bank.h"
+
+1588670704 c:\users\clubp\desktop\facultate\oop\homework 3\bank\bank.h
+	"Client.h"
+	<string>
+	<vector>
+	<unordered_map>
+	<ctime>
+
+1588670646 c:\users\clubp\desktop\facultate\oop\homework 3\bank\client.h
+	<iostream>
+	<vector>
+	<string>
+
+1588669886 source:c:\users\clubp\desktop\facultate\oop\homework 3\bank\main.cpp
+	<iostream>
+	<ctime>
+	"Bank.h"
+
+1588670646 source:c:\users\clubp\desktop\facultate\oop\homework 3\bank\client.cpp
+	"Client.h"
+	<algorithm>
+
+1588659827 c:\users\clubp\desktop\facultate\oop\homework 3\bank\client.cpp
+	"Client.h"
+	<algorithm>
+
