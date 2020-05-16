@@ -21,17 +21,32 @@ void afisare_conturi(ClassName &c) {
     }
 }
 
-banca :: banca(std :: string cod, std :: string nume, std :: string cod_bic) {
+template <>
+void afisare_conturi <std :: vector <cont_economii *>> (std :: vector <cont_economii *> &c) {
+    std :: string separator;
+    for (int i = 0; i < 36; ++i)
+        separator += " ";
+
+    for (auto it = c.begin(); it != c.end(); ++it) {
+        if ((*it) -> get_rata_dobanda() == 12)
+            std :: cout << dynamic_cast <cont_bancar *> (*it);
+        if (it + 1 != c.end())
+            std :: cout << "\n\n" << separator << "\n\n";
+    }
+}
+
+GestionareConturi :: GestionareConturi(std :: string cod, std :: string nume, std :: string cod_bic) {
         cod_tara = cod;
         nume_banca = nume;
         BIC = cod_bic;
-        numar_conturi = 0;
         afiseaza_meniu = true;
+        numar_conturi = 0;
 
         functii_actiuni.push_back(&creare_cont);
         functii_actiuni.push_back(&stergere_cont);
         functii_actiuni.push_back(&afisare_cont);
         functii_actiuni.push_back(&afisare_clienti);
+        functii_actiuni.push_back(&afisare_clienti_specializare);
         functii_actiuni.push_back(&iesire);
 
         functii_tipuri_de_conturi.push_back(&creare_cont_economii);
@@ -42,11 +57,12 @@ banca :: banca(std :: string cod, std :: string nume, std :: string cod_bic) {
         functii_cautare_clienti.push_back(&verificare_id_cont);
 }
 
-void banca :: operator += (cont_bancar *c) {
+void GestionareConturi :: operator += (cont_bancar *c) {
     conturi.push_back(c);
+    ++numar_conturi;
 }
 
-void banca :: mesaj_intampinare() {
+void GestionareConturi :: mesaj_intampinare() {
     std :: string mesaj = "Gestionarea conturilor deschise la banca " + nume_banca;
     std :: cout << mesaj << ":\n";
     for (unsigned int i = 0; i < mesaj.size() + 1; ++i)
@@ -54,13 +70,13 @@ void banca :: mesaj_intampinare() {
     std :: cout << "\n\n";
 }
 
-void banca :: revenire() {
+void GestionareConturi :: revenire() {
     std :: cout << "\n\nApasati orice tasta pentru a reveni la ecranul anterior.";
     getch();
     system("cls");
 }
 
-int banca :: afisare_vector(std :: vector <std :: string> x, std :: string mesaj1, std :: string mesaj2) {
+int GestionareConturi :: afisare_vector(std :: vector <std :: string> x, std :: string mesaj1, std :: string mesaj2) {
     std :: cout << mesaj1 << ":\n";
     unsigned int i;
     for (i = 0; i < x.size(); ++i)
@@ -76,7 +92,7 @@ int banca :: afisare_vector(std :: vector <std :: string> x, std :: string mesaj
     return i;
 }
 
-void banca :: generare_IBAN() {
+void GestionareConturi :: generare_IBAN() {
 
     srand(time(NULL));
 
@@ -122,20 +138,26 @@ void banca :: generare_IBAN() {
     IBAN = aux;
 }
 
-void banca :: creare_cont_economii(int a) {
+void GestionareConturi :: creare_cont_economii(int a) {
     int i = afisare_vector(tipuri_dobanzi, "Alege tipul dobanzii", "Tipul de dobanda este inexistent. Reincercati.");
     time_t now = time(0);
     generare_IBAN();
-    *this += new cont_economii(tipuri_de_valuta.at(a), IBAN, now, perioade_dobanzi[i - 1], rate_dobanzi[i - 1], ++numar_conturi);
+    try {
+        *this += new cont_economii(tipuri_de_valuta.at(a), IBAN, now, perioade_dobanzi[i - 1], rate_dobanzi[i - 1], numar_conturi + 1);
+    }
+    catch (const std :: bad_alloc &) {
+        std :: cout << "A fost atins numarul maxim de conturi.";
+        revenire();
+    }
 }
 
-void banca :: creare_cont_curent(int a) {
+void GestionareConturi :: creare_cont_curent(int a) {
     time_t now = time(0);
     generare_IBAN();
-    *this += new cont_curent(tipuri_de_valuta.at(a), IBAN, now, ++numar_conturi);
+    *this += new cont_curent(tipuri_de_valuta.at(a), IBAN, now, numar_conturi + 1);
 }
 
-void banca :: alegere_tip_cont() {
+void GestionareConturi :: alegere_tip_cont() {
     int j = afisare_vector(tipuri_de_valuta, "Alege tipul valutei", "Tipul de valuta este inexistent. Reincercati.");
     IBAN += prescurtari_valute[j - 1];
     int i = afisare_vector(tipuri_de_conturi, "Alege tipul contului", "Tipul de cont este inexistent. Reincercati.");
@@ -143,7 +165,7 @@ void banca :: alegere_tip_cont() {
    (this ->* functii_tipuri_de_conturi[i - 1])(j - 1);
 }
 
-void banca :: creare_cont() {
+void GestionareConturi :: creare_cont() {
     IBAN = cod_tara + "00" + BIC;
     alegere_tip_cont();
     std :: cin.ignore();
@@ -153,7 +175,7 @@ void banca :: creare_cont() {
     revenire();
 }
 
-void banca :: verificare_iban(std :: string IBAN) {
+void GestionareConturi :: verificare_iban(std :: string IBAN) {
     for (unsigned int i = 0; i < conturi.size(); ++i)
         if (conturi.at(i) -> IBAN == IBAN) {
             index_cont = i;
@@ -163,7 +185,7 @@ void banca :: verificare_iban(std :: string IBAN) {
     return;
 }
 
-void banca :: verificare_cnp(std :: string CNP) {
+void GestionareConturi :: verificare_cnp(std :: string CNP) {
     std :: string search = "Cod numeric personal";
     for (unsigned int i = 0; i < conturi.size(); ++i) {
         if (modify <informatii_personale> (search, *conturi.at(i) -> detinator -> detalii, GET) == CNP) {
@@ -175,7 +197,7 @@ void banca :: verificare_cnp(std :: string CNP) {
     return;
 }
 
-void banca :: verificare_id_cont(std :: string id) {
+void GestionareConturi :: verificare_id_cont(std :: string id) {
     long long int id_cont;
 
     try {
@@ -197,7 +219,7 @@ void banca :: verificare_id_cont(std :: string id) {
     index_cont = -1;
 }
 
-void banca :: cautare_cont() {
+void GestionareConturi :: cautare_cont() {
     std :: string input;
     int i = afisare_vector(criterii_cautare_clienti, "Alege criteriul dupa care se va realiza cautarea contului", "Criteriul este inexistent. Reincercati.");
     std :: cout << "Introdu valoarea cautata:\n> ";
@@ -206,16 +228,35 @@ void banca :: cautare_cont() {
     return;
 }
 
-void banca :: afisare_clienti() {
+void GestionareConturi :: afisare_clienti() {
     std :: vector <cont_bancar*> :: iterator it = conturi.begin();
     if (it == conturi.end())
         std :: cout << "Nu exista clienti.";
     else
-        afisare_conturi (conturi);
+        std :: cout << (this);
     revenire();
 }
 
-void banca :: afisare_cont() {
+
+void GestionareConturi :: afisare_clienti_specializare() {
+    std :: vector <cont_bancar*> :: iterator it = conturi.begin();
+    if (it == conturi.end())
+        std :: cout << "Nu exista conturi de economii cu rata dobanzii la 1 an.";
+    else {
+        int i = 0;
+        std :: vector <cont_economii *> conturi_economii(conturi.size());
+        for (auto it = conturi.begin(); it != conturi.end(); ++it) {
+            if (dynamic_cast <cont_economii *> (*it))
+                conturi_economii.at(i++) = dynamic_cast <cont_economii *> (*it);
+        }
+        afisare_conturi (conturi_economii);
+        conturi_economii.clear();
+    }
+
+    revenire();
+}
+
+void GestionareConturi :: afisare_cont() {
     cautare_cont();
     std :: cout << "\n";
     if (index_cont == -1)
@@ -226,7 +267,7 @@ void banca :: afisare_cont() {
     return;
 }
 
-void banca :: stergere_cont() {
+void GestionareConturi :: stergere_cont() {
     cautare_cont();
     if (index_cont == -1)
         std :: cout << "Contul nu a fost gasit.";
@@ -243,20 +284,20 @@ void banca :: stergere_cont() {
     return;
 }
 
-void banca :: iesire() {
+void GestionareConturi :: iesire() {
     std :: cout << "La revedere!";
     afiseaza_meniu = false;
     return;
 }
 
-void banca :: analizeaza_raspuns() {
+void GestionareConturi :: analizeaza_raspuns() {
     int i = afisare_vector(actiuni, "Alege actiunea dorita", "Tipul de actiune este inexistenta. Reincercati.");
 
     system("cls");
     (this ->* functii_actiuni[i - 1])();
 }
 
-void banca :: meniu_principal() {
+void GestionareConturi :: meniu_principal() {
     while(afiseaza_meniu) {
         mesaj_intampinare();
         analizeaza_raspuns();
@@ -308,4 +349,52 @@ void cont_economii :: afisare() {
 
 void cont_curent :: afisare() {
     std :: cout << "\n\nNumar tranzactii gratuite ramase: " << numar_tranzactii_gratuite;
+}
+
+double cont_economii :: get_rata_dobanda() {
+    return rata_dobanda;
+}
+
+std :: ostream &operator << (std :: ostream &out, GestionareConturi *b) {
+    afisare_conturi(b -> conturi);
+    return out;
+}
+
+
+GestionareConturi& GestionareConturi :: operator = (const GestionareConturi &GC) {
+    nume_banca = GC.nume_banca;
+    index_cont = GC.index_cont;
+    numar_conturi = GC.numar_conturi;
+    afiseaza_meniu = GC.afiseaza_meniu;
+    cod_tara = GC.cod_tara;
+    BIC = GC.BIC;
+    IBAN = GC.IBAN;
+    conturi = GC.conturi;
+    functii_actiuni = GC.functii_actiuni;
+    functii_tipuri_de_conturi = GC.functii_tipuri_de_conturi;
+    functii_cautare_clienti = GC.functii_cautare_clienti;
+    return *this;
+}
+
+cont_bancar& cont_bancar :: operator = (const cont_bancar &c) {
+    detinator = c.detinator;
+    IBAN = c.IBAN;
+    tip_valuta = c.tip_valuta;
+    actiuni = c.actiuni;
+    id_cont = c.id_cont;
+    data_deschidere = c.data_deschidere;
+    sold = c.sold;
+    return *this;
+}
+
+cont_economii& cont_economii :: operator = (const cont_economii &c) {
+    istoric = c.istoric;
+    dobanda = c.dobanda;
+    rata_dobanda = c.rata_dobanda;
+    return *this;
+}
+
+cont_curent& cont_curent :: operator = (const cont_curent &c) {
+    numar_tranzactii_gratuite = c.numar_tranzactii_gratuite;
+    return *this;
 }

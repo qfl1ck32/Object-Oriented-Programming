@@ -3,6 +3,6 @@
 #include "Bank.h"
 
 int main() {
-    banca *BT = new banca("RO", "Banca Transilvania", "BTRL");
+    GestionareConturi *BT = new GestionareConturi ("RO", "Banca Transilvania", "BTRL");
     BT -> meniu_principal();
 }

@@ -73,3 +73,19 @@ std :: ostream &operator << (std :: ostream &out, const client *c) {
     out << *(c -> locatie);
     return out;
 }
+
+adresa& adresa :: operator = (const adresa &a) {
+    detalii = a.detalii;
+    return *this;
+}
+
+informatii_personale& informatii_personale :: operator = (const informatii_personale &i) {
+    detalii = i.detalii;
+    return *this;
+}
+
+client& client :: operator = (const client &c) {
+    locatie = c.locatie;
+    detalii = c.detalii;
+    return *this;
+}

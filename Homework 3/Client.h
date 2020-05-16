@@ -21,6 +21,8 @@ public:
 
     friend std :: istream &operator >> (std :: istream &in, adresa &a);
     friend std :: ostream &operator << (std :: ostream &out, adresa &a);
+
+    adresa& operator = (const adresa &a);
 };
 
 class informatii_personale {
@@ -36,17 +38,21 @@ public:
 
     friend std :: istream &operator >> (std :: istream &in, informatii_personale &i);
     friend std :: ostream &operator << (std :: ostream &out, informatii_personale &i);
+
+    informatii_personale& operator = (const informatii_personale &i);
 };
 
 class client {
 protected:
     adresa *locatie = new adresa;
     informatii_personale *detalii = new informatii_personale;
-    friend class banca;
+    friend class GestionareConturi;
 public:
 
     friend std :: istream &operator >> (std :: istream &in, client *c);
     friend std :: ostream &operator << (std :: ostream &out, const client *c);
+
+    client& operator = (const client &c);
 };
 
 #endif // CLIENT_H_INCLUDED

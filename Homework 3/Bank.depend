@@ -32,3 +32,32 @@
 	"Client.h"
 	<algorithm>
 
+1589637868 source:c:\users\clubp\desktop\facultate\oop\homework 3\homework 3\bank.cpp
+	<iostream>
+	<cmath>
+	<algorithm>
+	<conio.h>
+	<ctime>
+	"Bank.h"
+
+1589637868 c:\users\clubp\desktop\facultate\oop\homework 3\homework 3\bank.h
+	"Client.h"
+	<string>
+	<vector>
+	<unordered_map>
+	<ctime>
+
+1589636707 c:\users\clubp\desktop\facultate\oop\homework 3\homework 3\client.h
+	<iostream>
+	<vector>
+	<string>
+
+1589636707 source:c:\users\clubp\desktop\facultate\oop\homework 3\homework 3\client.cpp
+	"Client.h"
+	<algorithm>
+
+1589636281 source:c:\users\clubp\desktop\facultate\oop\homework 3\homework 3\main.cpp
+	<iostream>
+	<ctime>
+	"Bank.h"
+
