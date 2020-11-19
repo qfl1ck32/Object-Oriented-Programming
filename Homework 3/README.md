@@ -1,6 +1,6 @@
 ## This project represents a simulation for a bank application, in which you can manage the accounts.
 
-Every account has an owner (with his own personal details), a balance, the date at which is was created, a correctly generated IBAN
+Every account has an owner (with his own personal details), a balance, the date at which it was created, a correctly generated IBAN
 and other details, depending on the type of the bank account.
 
 Currently, the supported actions are as follows:
